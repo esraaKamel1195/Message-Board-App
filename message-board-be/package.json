@@ -1,0 +1,30 @@
+{
+  "name": "message-board-app",
+  "version": "1.0.0",
+  "description": "message board app with nodejs, express, authentication",
+  "main": "app.js",
+  "scripts": {
+    "test": "jasmine",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esraaKamel1195/Message-Board-App.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "jwt",
+    "authentication"
+  ],
+  "author": "Esraa Kamel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/esraaKamel1195/Message-Board-App/issues"
+  },
+  "homepage": "https://github.com/esraaKamel1195/Message-Board-App#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
+  }
+}
