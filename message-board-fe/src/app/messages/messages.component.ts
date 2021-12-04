@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Message } from './message.model'
+import { MessagesService } from './messages.service';
 
 @Component({
   selector: 'app-messages',
@@ -8,12 +9,16 @@ import { Message } from './message.model'
 })
 
 export class MessagesComponent implements OnInit {
-  messages: Message [] = [
-    { text: 'some text', owner: 'Tim' },
-    { text: 'other message', owner: 'Jane' },
-  ];
+  messages: any [] = [];
 
-  constructor() {}
+  constructor(
+    private messagesService: MessagesService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit() {
+    this.messagesService.getMessages().subscribe((res:any) => {
+      this.messages = res.messages;
+      console.log(res);
+    });
+  }
 }
