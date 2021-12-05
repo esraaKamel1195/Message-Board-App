@@ -1,13 +1,13 @@
 <mat-card class="example-card">
     <mat-card-content>
         <mat-form-field class="example-form-field" appearance="fill">
-            <input matInput type="text" placeholder="name">
+            <input matInput type="text" [(ngModel)]="message.owner" placeholder="name">
         </mat-form-field>
         <mat-form-field class="example-form-field" appearance="fill">
-            <textarea matInput type="text" placeholder="message"></textarea>
+            <textarea matInput type="text" [(ngModel)]="message.text" placeholder="message"></textarea>
         </mat-form-field>
         <mat-card-actions>
-            <button mat-button mat-raised-button color="primary">Post</button>
+            <button mat-button mat-raised-button color="primary" (click)="post()">Post</button>
         </mat-card-actions>
     </mat-card-content>
 </mat-card>
