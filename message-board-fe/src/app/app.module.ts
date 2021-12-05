@@ -16,13 +16,15 @@ import { MessagesComponent } from './messages/messages.component';
 import { MessagesService } from './messages/messages.service';
 import { NewMessageComponent } from './messages/new-message/new-message.component';
 import { NavComponent } from './nav/nav.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MessagesComponent,
     NewMessageComponent,
-    NavComponent
+    NavComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
