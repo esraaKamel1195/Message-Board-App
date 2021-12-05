@@ -8,15 +8,23 @@ import { Message } from './message.model';
 
 export class MessagesService {
   base_url: string = 'http://localhost:3000/api/';
+  messages: Message[] = [];
+
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+    this.getMessages();
+  }
 
   getMessages() {
-    return this.http.get(`${this.base_url}messages`);
+    this.http.get<Message []>(`${this.base_url}messages`).subscribe((res) => {
+      this.messages = res;
+    });
   }
 
   postMessages(message: Message) {
-    return this.http.post(`${this.base_url}messages`, message);
+    this.http.post<Message>(`${this.base_url}messages`, message).subscribe((res) => {
+      this.messages.push(res);
+    });
   }
 }

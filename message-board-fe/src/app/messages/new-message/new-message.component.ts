@@ -10,7 +10,6 @@ import { MessagesService } from '../messages.service';
 
 export class NewMessageComponent implements OnInit {
   message: Message = { owner: '', text: '' };
-  @Output() onPosted = new EventEmitter();
 
   constructor(
     private messagesService: MessagesService
@@ -20,9 +19,6 @@ export class NewMessageComponent implements OnInit {
   }
 
   post() {
-    this.messagesService.postMessages(this.message).subscribe((res)=> {
-      console.log(res);
-    });
-    this.onPosted.emit(this.message);
+    this.messagesService.postMessages(this.message);
   }
 }

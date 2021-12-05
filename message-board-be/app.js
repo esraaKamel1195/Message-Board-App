@@ -16,7 +16,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 api.get('/messages', ( req, res )=> {
-  res.json({ "messages": messages });
+  res.json(messages);
 });
 
 api.post('/messages', (req, res) => {
