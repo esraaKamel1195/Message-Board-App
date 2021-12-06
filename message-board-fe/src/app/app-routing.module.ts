@@ -7,7 +7,8 @@ import { MessagesComponent } from './messages/messages.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'messages', component: MessagesComponent },
-  { path: 'messages/:name', component: MessagesComponent }
+  { path: 'messages/:name', component: MessagesComponent },
+  { path: '**', component: HomeComponent }
 ];
 
 @NgModule({

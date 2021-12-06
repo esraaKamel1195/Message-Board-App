@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Message } from './message.model'
+import { ActivatedRoute } from '@angular/router';
+import { Message } from './message.model';
 import { MessagesService } from './messages.service';
 
 @Component({
@@ -11,9 +12,13 @@ import { MessagesService } from './messages.service';
 export class MessagesComponent implements OnInit {
 
   constructor(
-    public messagesService: MessagesService
+    public messagesService: MessagesService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    if( this.route.snapshot.params['name'] ) {
+      console.log( this.route.snapshot.params['name'] );
+    }
   }
 }
