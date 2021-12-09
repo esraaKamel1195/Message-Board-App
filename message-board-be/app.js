@@ -16,11 +16,18 @@ app.use(cors());
 app.use(bodyParser.json());
 
 api.get('/messages', ( req, res )=> {
+  console.log(messages);
   res.json(messages);
 });
 
+api.get('/messages/:user', (req, res) => {
+  let user = req.params.user;
+  let result = messages.filter( message => message.owner == user);
+
+  res.json(result);
+});
+
 api.post('/messages', (req, res) => {
-  console.log(true)
   messages.push(req.body);
   res.json(req.body);
 });

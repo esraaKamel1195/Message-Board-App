@@ -11,14 +11,18 @@ import { MessagesService } from './messages.service';
 
 export class MessagesComponent implements OnInit {
 
-  constructor(
+  public messages: Message [] = [];
+
+  constructor (
     public messagesService: MessagesService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    if( this.route.snapshot.params['name'] ) {
-      console.log( this.route.snapshot.params['name'] );
-    }
+    let name: string = this.route.snapshot.params['name'];
+    this.messagesService.getMessages(name);
+    this.messagesService.messageSubject.subscribe((messages: Message []) => {
+      this.messages = messages;
+    })
   }
 }
