@@ -1,25 +1,27 @@
 <section>
     <mat-card class="card">
-        <mat-form-field class="example-form-field" appearance="fill">
-            <input matInput type="text" placeholder="First name">
-        </mat-form-field>
-    
-        <mat-form-field class="example-form-field" appearance="fill">
-            <input matInput type="text" placeholder="Last name">
-        </mat-form-field>
-    
-        <mat-form-field class="example-form-field" appearance="fill">
-            <input matInput type="text" placeholder="email">
-        </mat-form-field>
-    
-        <mat-form-field class="example-form-field" appearance="fill">
-            <input matInput type="text" placeholder="password">
-        </mat-form-field>
-    
-        <mat-form-field class="example-form-field" appearance="fill">
-            <input matInput type="text" placeholder="confirm password">
-        </mat-form-field>
-    
-        <button mat-raised-button color="primary"> Register </button>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <mat-form-field class="example-form-field" appearance="fill">
+                <input matInput type="text" formControlName="firstName" [ngClass]="{'error': isValid('firstName')}" placeholder="First name">
+            </mat-form-field>
+        
+            <mat-form-field class="example-form-field" appearance="fill">
+                <input matInput type="text" formControlName="lastName" [ngClass]="{'error': isValid('lastName')}" placeholder="Last name">
+            </mat-form-field>
+        
+            <mat-form-field class="example-form-field" appearance="fill">
+                <input matInput type="text" formControlName="email" [ngClass]="{'error': isValid('email')}" placeholder="email">
+            </mat-form-field>
+        
+            <mat-form-field class="example-form-field" appearance="fill">
+                <input matInput type="password" formControlName="password" [ngClass]="{'error': isValid('password')}" placeholder="password">
+            </mat-form-field>
+        
+            <mat-form-field class="example-form-field" appearance="fill">
+                <input matInput type="password" formControlName="confirmPassword" [ngClass]="{'error': isValid('confirmPassword')}" placeholder="confirm password">
+            </mat-form-field>
+        
+            <button mat-raised-button color="primary"> Register </button>
+        </form>
     </mat-card>
 </section>
