@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { MessagesService } from './messages/messages.service';
 import { NewMessageComponent } from './messages/new-message/new-message.component';
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
+import { RegisterationComponent } from './registeration/registeration.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { HomeComponent } from './home/home.component';
     MessagesComponent,
     NewMessageComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterationComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { HomeComponent } from './home/home.component';
     MatInputModule,
     MatIconModule,
     MatSnackBarModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatFormFieldModule
   ],
   providers: [ MessagesService ],
   bootstrap: [ AppComponent ]
