@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const api = express.Router();
 
-var messages = [{text: 'some text', owner: 'Tim'},{text: 'other message', owner: 'Jane'}];
+var messages = [ { text: 'some text', owner: 'Tim' }, { text: 'other message', owner: 'Jane' } ];
 
 app.use((req, res, next) => {
   req.header('Access-control-Allow-Origian', '*');

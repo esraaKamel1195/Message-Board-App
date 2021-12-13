@@ -1,4 +1,4 @@
-<div *ngFor="let message of messages">
+<div *ngFor="let message of messagesService.messages | async">
     <mat-card class="example-card">
         <mat-card-title [routerLink]="['messages', message.owner]">
             {{ message.owner }}
