@@ -12,6 +12,10 @@
             <mat-form-field class="example-form-field" appearance="fill">
                 <input matInput type="text" formControlName="email" [ngClass]="{'error': isValid('email')}" placeholder="email">
             </mat-form-field>
+
+            <div *ngIf="registerForm.hasError('invalidEmail', 'email')">
+                <span> Email format not correct </span>
+            </div>
         
             <mat-form-field class="example-form-field" appearance="fill">
                 <input matInput type="password" formControlName="password" [ngClass]="{'error': isValid('password')}" placeholder="password">
@@ -24,6 +28,7 @@
             <div *ngIf="registerForm.hasError('misMatchedField')">
                 <span> Passwords do not match </span>
             </div>
+
             <button mat-raised-button color="primary"> Register </button>
         </form>
     </mat-card>

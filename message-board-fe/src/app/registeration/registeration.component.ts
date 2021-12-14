@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registeration',
@@ -20,7 +20,7 @@ export class RegisterationComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required ],
       lastName: ['', Validators.required ],
-      email: ['', Validators.required ],
+      email: ['', [ Validators.required, emailValid() ] ],
       password: ['', Validators.required ],
       confirmPassword: ['', Validators.required ]
     }, {
@@ -40,12 +40,20 @@ export class RegisterationComponent implements OnInit {
   }
 }
 
-function matchingValues( password1: string, password2: string): {} {
+function matchingValues( password1: string, password2: string): {} | null{
   return (form:FormGroup) => {
     if( form.controls[password1].value !== form.controls[password2].value ) {
       return { misMatchedField: true }
     } else {
       return null
     }
+  }
+}
+
+function emailValid() {
+  return (control: FormControl) => {
+    let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+    return regex.test(control.value) ? null : { invalidEmail: true };
   }
 }
