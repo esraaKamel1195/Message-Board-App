@@ -20,7 +20,10 @@
             <mat-form-field class="example-form-field" appearance="fill">
                 <input matInput type="password" formControlName="confirmPassword" [ngClass]="{'error': isValid('confirmPassword')}" placeholder="confirm password">
             </mat-form-field>
-        
+
+            <div *ngIf="registerForm.hasError('misMatchedField')">
+                <span> Passwords do not match </span>
+            </div>
             <button mat-raised-button color="primary"> Register </button>
         </form>
     </mat-card>

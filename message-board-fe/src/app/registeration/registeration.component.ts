@@ -8,7 +8,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 
 export class RegisterationComponent implements OnInit {
+
   public registerForm: FormGroup = new FormGroup({});
+  public misMatechedField: boolean = false;
+  
   constructor(
     private formBuilder: FormBuilder
   ) { }
@@ -20,14 +23,29 @@ export class RegisterationComponent implements OnInit {
       email: ['', Validators.required ],
       password: ['', Validators.required ],
       confirmPassword: ['', Validators.required ]
-    })
+    }, {
+      validators: matchingValues('password', 'confirmPassword')
+    });
   }
 
   onSubmit() {
-    console.log( this.registerForm.value );
+    if( this.registerForm.errors )
+      console.log( this.registerForm.errors['misMatchedField'] );
+    else
+      console.log( this.registerForm.value );
   }
 
   isValid(control: string) {
     return this.registerForm.controls[control].invalid && this.registerForm.controls[control].touched;
+  }
+}
+
+function matchingValues( password1: string, password2: string): {} {
+  return (form:FormGroup) => {
+    if( form.controls[password1].value !== form.controls[password2].value ) {
+      return { misMatchedField: true }
+    } else {
+      return null
+    }
   }
 }
