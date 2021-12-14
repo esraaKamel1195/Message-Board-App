@@ -12,6 +12,9 @@ export class AuthService {
   ) { }
 
   register( user: any ) {
-    this.http.post(this.BASE_URL + '/register', user).subscribe();
+    delete user.confirmPassword;
+    this.http.post<string>(this.BASE_URL + '/register', user).subscribe( (res)=> {
+      localStorage.setItem('token', res );
+    });
   }
 }
