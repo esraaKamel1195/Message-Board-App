@@ -19,6 +19,7 @@ import { NewMessageComponent } from './messages/new-message/new-message.componen
 import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterationComponent } from './registeration/registeration.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { RegisterationComponent } from './registeration/registeration.component'
     MatToolbarModule,
     MatFormFieldModule
   ],
-  providers: [ MessagesService ],
+  providers: [ MessagesService, AuthService ],
   bootstrap: [ AppComponent ]
 })
 

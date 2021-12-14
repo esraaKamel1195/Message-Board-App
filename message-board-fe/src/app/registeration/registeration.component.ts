@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-registeration',
@@ -13,7 +14,8 @@ export class RegisterationComponent implements OnInit {
   public misMatechedField: boolean = false;
   
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +34,7 @@ export class RegisterationComponent implements OnInit {
     if( this.registerForm.errors )
       console.log( this.registerForm.errors['misMatchedField'] );
     else
-      console.log( this.registerForm.value );
+      this.authService.register( this.registerForm.value );
   }
 
   isValid(control: string) {
