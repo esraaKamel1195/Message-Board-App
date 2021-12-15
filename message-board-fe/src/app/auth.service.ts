@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
   BASE_URL: string = 'http://localhost:3000/auth/';
@@ -20,6 +21,11 @@ export class AuthService {
 
   get isAuthenticated() {
     return !!localStorage.getItem('token');
+  }
+
+  get tokenHeader() {
+    let Heeders = new HttpHeaders({ 'Authorization': 'Bearer' + localStorage.getItem('token') });
+    return Heeders;
   }
 
   register( user: any ) {
