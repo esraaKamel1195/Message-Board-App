@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  BASE_URL: string = 'http://localhost:3000/auth';
+  BASE_URL: string = 'http://localhost:3000/auth/';
+  
   constructor(
     private http: HttpClient,
     private router: Router
@@ -23,7 +24,23 @@ export class AuthService {
 
   register( user: any ) {
     delete user.confirmPassword;
-    this.http.post<{ firstName: string, token: string }>(this.BASE_URL + '/register', user).subscribe( (res)=> {
+    this.http.post<{ firstName: string, token: string }>(this.BASE_URL + 'register', user).subscribe( (res)=> {
+      this.authenticate(res);
+    });
+  }
+
+  login(user: any) {
+    this.http.post<{ firstName: string, token: string }>(this.BASE_URL + 'login', user).subscribe((res) => {
+      this.authenticate(res);
+    })
+  }
+
+  logout() {
+    localStorage.removeItem('name');
+    localStorage.removeItem('token');
+  }
+
+  authenticate(res: { firstName: string, token: string }) {
       let authResponse = res;
       if(!authResponse.token) {
         return;
@@ -31,7 +48,6 @@ export class AuthService {
       localStorage.setItem( 'token', authResponse.token );
       localStorage.setItem( 'name', authResponse.firstName );
 
-      this.router.navigate(['/'])
-    });
+      this.router.navigate(['/']);
   }
 }

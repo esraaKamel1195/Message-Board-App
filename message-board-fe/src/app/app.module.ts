@@ -20,6 +20,7 @@ import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterationComponent } from './registeration/registeration.component';
 import { AuthService } from './auth.service';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AuthService } from './auth.service';
     NewMessageComponent,
     NavComponent,
     HomeComponent,
-    RegisterationComponent
+    RegisterationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

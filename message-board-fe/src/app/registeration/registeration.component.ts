@@ -11,7 +11,6 @@ import { AuthService } from '../auth.service';
 export class RegisterationComponent implements OnInit {
 
   public registerForm: FormGroup = new FormGroup({});
-  public misMatechedField: boolean = false;
   
   constructor(
     private formBuilder: FormBuilder,

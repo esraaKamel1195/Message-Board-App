@@ -1,0 +1,20 @@
+<section>
+    <mat-card class="card">
+        <form [formGroup]="loginForm">
+
+            <mat-form-field class="example-form-field" appearance="fill">
+                <input matInput type="text" formControlName="email" [ngClass]="{'error': isValid('email')}" placeholder="email">
+            </mat-form-field>
+
+            <div *ngIf="loginForm.hasError('invalidEmail', 'email')">
+                <span> Email format not correct </span>
+            </div>
+        
+            <mat-form-field class="example-form-field" appearance="fill">
+                <input matInput type="password" formControlName="password" [ngClass]="{'error': isValid('password')}" placeholder="password">
+            </mat-form-field>
+        
+            <button mat-raised-button color="primary" (click)="login()"> Login </button>
+        </form>
+    </mat-card>
+</section>

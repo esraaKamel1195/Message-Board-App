@@ -7,7 +7,7 @@ const api = express.Router();
 const auth = express.Router();
 
 var messages = [ { text: 'some text', owner: 'Tim' }, { text: 'other message', owner: 'Jane' } ];
-var users = [];
+var users = [ { firstName: 'Esraa', lastName: 'Kamel', email: 'esraa.kamel1811@gmail.com', password: '123', id: 0 }];
 
 app.use((req, res, next) => {
   req.header('Access-control-Allow-Origian', '*');
@@ -19,7 +19,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 api.get('/messages', ( req, res )=> {
-  console.log(messages);
   res.json(messages);
 });
 
@@ -35,15 +34,35 @@ api.post('/messages', (req, res) => {
   res.json(req.body);
 });
 
+auth.post('/login', ( req, res) => {
+  var user = users.find( user => user.email == req.body.email );
+
+  if(!user) {
+    sendAuthError(res);
+  } else if ( user.password == req.body.password ) {
+    sendToken(user, res);
+  } else {
+    sendAuthError(res);
+  }
+});
+
 auth.post('/register', (req, res)=> {
   var index = users.push(req.body) - 1;
 
   var user = users[index];
   user.id = index;
 
-  var token = jwt.sign( user.id, '123' );
-  res.json(token);
+  sendToken(user, res);
 });
+
+function sendToken(user, res) {
+  let token = jwt.sign( user.id, '123' );
+  res.json({ firstName: user.firstName, token: token });
+}
+
+function sendAuthError(res) {
+  return res.json({ success: false, message: 'email or password incorrect'})
+}
 
 app.use('/api', api);
 app.use('/auth', auth);
