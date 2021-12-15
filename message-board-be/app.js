@@ -11,7 +11,7 @@ var users = [ { firstName: 'Esraa', lastName: 'Kamel', email: 'esraa.kamel1811@g
 
 app.use((req, res, next) => {
   req.header('Access-control-Allow-Origian', '*');
-  req.header('Access-control-Allow-headers', 'Origian, X-Requested-With, Content-Type, Accept');
+  req.header('Access-control-Allow-headers', 'Origian, X-Requested-With, Content-Type, Accept, Authorizaton');
   next();
 })
 
@@ -32,6 +32,19 @@ api.get('/messages/:user', (req, res) => {
 api.post('/messages', (req, res) => {
   messages.push(req.body);
   res.json(req.body);
+});
+
+api.get('/users/me', checkAuthenticated, (req, res) => {
+  res.status(200).json(users[req.user]);
+});
+
+api.post('/users/me', checkAuthenticated, (req, res) => {
+  let user = users[req.user];
+
+  user.firstName = req.body.firstName;
+  user.lastName = req.body.lastName;
+
+  res.status(200).json(user);
 });
 
 auth.post('/login', ( req, res) => {
@@ -62,6 +75,23 @@ function sendToken(user, res) {
 
 function sendAuthError(res) {
   return res.json({ success: false, message: 'email or password incorrect'})
+}
+
+function checkAuthenticated(req, res, next) {
+  if( !req.header('authorization') ) {
+    return res.status(401).send({message: ' Unauthorizaed Requested. Missing authentication header'});
+  }
+
+  var token = req.header('authorization').split(' ')[1];
+  var decodedToken = jwt.decode(token, '123');
+
+  if( !decodedToken ) {
+    return res.status(401).send({ message: 'Unauthorized Requested. authentication header invalid'});
+  } else {
+    req.user = decodedToken;
+  }
+
+  next()
 }
 
 app.use('/api', api);
