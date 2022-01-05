@@ -24,36 +24,40 @@ export class AuthService {
   }
 
   get tokenHeader() {
-    let Heeders = new HttpHeaders({ 'Authorization': 'Bearer' + localStorage.getItem('token') });
+    let Heeders: HttpHeaders = new HttpHeaders().set( 
+      'Authorization', 'Bearer' + localStorage.getItem('token')
+    );
     return Heeders;
   }
 
-  register( user: any ) {
+  register( user: any ): void {
     delete user.confirmPassword;
-    this.http.post<{ firstName: string, token: string }>(this.BASE_URL + 'register', user).subscribe( (res)=> {
-      this.authenticate(res);
+    this.http.post<{ firstName: string, token: string }>(
+      this.BASE_URL + 'register', user).subscribe( (res)=> {
+        this.authenticate(res);
     });
   }
 
-  login(user: any) {
-    this.http.post<{ firstName: string, token: string }>(this.BASE_URL + 'login', user).subscribe((res) => {
-      this.authenticate(res);
+  login( user: any): void {
+    this.http.post<{ firstName: string, token: string }>(
+      this.BASE_URL + 'login', user).subscribe((res) => {
+        this.authenticate(res);
     })
   }
 
-  logout() {
+  logout(): void {
     localStorage.removeItem('name');
     localStorage.removeItem('token');
   }
 
-  authenticate(res: { firstName: string, token: string }) {
-      let authResponse = res;
-      if(!authResponse.token) {
-        return;
-      }
-      localStorage.setItem( 'token', authResponse.token );
-      localStorage.setItem( 'name', authResponse.firstName );
+  authenticate(res: { firstName: string, token: string }): void {
+    let authResponse = res;
+    if(!authResponse.token) {
+      return;
+    }
+    localStorage.setItem( 'token', authResponse.token );
+    localStorage.setItem( 'name', authResponse.firstName );
 
-      this.router.navigate(['/']);
+    this.router.navigate(['/']);
   }
 }

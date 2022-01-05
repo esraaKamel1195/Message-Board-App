@@ -22,6 +22,7 @@ import { RegisterationComponent } from './registeration/registeration.component'
 import { AuthService } from './auth.service';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { UserComponent } from './user/user.component';
     HomeComponent,
     RegisterationComponent,
     LoginComponent,
-    UserComponent
+    UserComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +50,7 @@ import { UserComponent } from './user/user.component';
     MatToolbarModule,
     MatFormFieldModule
   ],
-  providers: [ MessagesService, AuthService ],
+  providers: [ MessagesService, AuthService, UserService ],
   bootstrap: [ AppComponent ]
 })
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -14,15 +15,21 @@ export class UserService {
     private authService: AuthService
   ) {}
 
-  // getUser() {
-  //   return this.http
-  //     .get(this.BASE_URL + '/users/me', { Headers : this.authService.tokenHeader()}).pipe()
-  //     .map((res) => res.json());
-  // }
+  getUser() {
 
-  // saveUser(userData) {
-  //   return this.http
-  //     .post(this.BASE_URL + '/users/me', userData, this.authService.tokenHeader)
-  //     .map((res) => res.json());
-  // }
+    return this.http
+      .get(this.BASE_URL + '/users/me', { headers: this.authService.tokenHeader } )
+      .pipe(
+        map( (res) => console.log(res))
+      )
+  }
+
+  saveUser(userData: {}) {
+
+    return this.http
+      .post(this.BASE_URL + '/users/me', userData, { headers: this.authService.tokenHeader } )
+      .pipe(
+        map( (res) => console.log(res))
+      );
+  }
 }
