@@ -8,9 +8,6 @@ const jwt = require('jsonwebtoken');
 const api = express.Router();
 const auth = express.Router();
 
-var messages = [ { text: 'some text', owner: 'Tim' }, { text: 'other message', owner: 'Jane' } ];
-var users = [ { firstName: 'Esraa', lastName: 'Kamel', email: 'esraa.kamel1811@gmail.com', password: '123', id: 0 }];
-
 app.use((req, res, next) => {
   req.header('Access-control-Allow-Origian', '*');
   req.header('Access-control-Allow-headers', 'Origian, X-Requested-With, Content-Type, Accept, Authorizaton');
@@ -99,6 +96,6 @@ function checkAuthenticated(req, res, next) {
 app.use('/api', api);
 app.use('/auth', auth);
 
-app.listen(3000, ()=> {
-  console.log('Server Started at Port 3000');
+app.listen(5000, ()=> {
+  console.log('Server Started at Port 5000');
 });
