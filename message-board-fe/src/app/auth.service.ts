@@ -25,7 +25,7 @@ export class AuthService {
 
   get tokenHeader() {
     let Heeders: HttpHeaders = new HttpHeaders().set( 
-      'Authorization', 'Bearer' + localStorage.getItem('token')
+      'Authorization', 'Bearer ' + localStorage.getItem('token')
     );
     return Heeders;
   }
