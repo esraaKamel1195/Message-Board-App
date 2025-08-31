@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class UserService {
 
-  BASE_URL: string = 'http://localhost:3000/api/';
+  BASE_URL: string = 'http://localhost:5000/api/';
 
   constructor(
     private http: HttpClient,
@@ -18,14 +18,14 @@ export class UserService {
   getUser() {
     return this.http
       .get<{ firstName: string, lastName: string, email: string, password: string }>(
-        this.BASE_URL + 'users/me', { headers: this.authService.tokenHeader } 
+        this.BASE_URL + 'users/me', { headers: this.authService.tokenHeader }
       );
   }
 
   saveUser(userData: {}) {
     return this.http
       .post<{ firstName: string, lastName: string, email: string, password: string }>(
-        this.BASE_URL + 'users/me', userData, { headers: this.authService.tokenHeader } 
+        this.BASE_URL + 'users/me', userData, { headers: this.authService.tokenHeader }
       ).subscribe( (res) => {
         localStorage.setItem( 'name', res.firstName );
       });

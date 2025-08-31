@@ -8,12 +8,12 @@ import { Observable, Subject } from 'rxjs';
 })
 
 export class MessagesService {
-  base_url: string = 'http://localhost:3000/api/';
+  base_url: string = 'http://localhost:5000/api/';
   private messagesStore: Message [] = [];
   public messageSubject = new Subject<Message []>();
 
   public messages: Observable< Message[] > = this.messageSubject.asObservable();
-  
+
   constructor(
     private http: HttpClient,
     private snakeBar: MatSnackBar
@@ -21,7 +21,7 @@ export class MessagesService {
     this.getMessages(null);
   }
 
-  getMessages(user: string | null) {    
+  getMessages(user: string | null) {
       let username = (user)? '/' + user: '';
       this.http.get<Message []>(`${this.base_url}messages${username}`).subscribe((res)=> {
         this.messagesStore = res;
@@ -31,7 +31,7 @@ export class MessagesService {
       });
   }
 
-  getMessagesByName( user: string ) {    
+  getMessagesByName( user: string ) {
     try {
       let username = (user)? '/' + user: '';
       this.http.get<Message []>(`${this.base_url}messages${username}`).subscribe((res) => {

@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 
 export class AuthService {
 
-  BASE_URL: string = 'http://localhost:3000/auth/';
-  
+  BASE_URL: string = 'http://localhost:5000/auth/';
+
   constructor(
     private http: HttpClient,
     private router: Router
@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   get tokenHeader() {
-    let Heeders: HttpHeaders = new HttpHeaders().set( 
+    let Heeders: HttpHeaders = new HttpHeaders().set(
       'Authorization', 'Bearer ' + localStorage.getItem('token')
     );
     return Heeders;

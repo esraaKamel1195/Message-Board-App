@@ -5,8 +5,11 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
+// const {Mongoose} = require("mongoose");
 const api = express.Router();
 const auth = express.Router();
+const users = require('./models/userModel');
+const messages = require('./models/messageModel');
 
 app.use((req, res, next) => {
   req.header('Access-control-Allow-Origian', '*');
@@ -90,7 +93,7 @@ function checkAuthenticated(req, res, next) {
     req.user = decodedToken;
   }
 
-  next()
+  next();
 }
 
 app.use('/api', api);
